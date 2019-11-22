@@ -4,21 +4,86 @@
   <meta charset="UTF-8">
   <title>Tabs</title>
       <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" type="text/css" href="table.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
       <script type="text/javascript">
+        window.posVal = 0;
+        window.negVal = 0;
+        window.neuVal = 0;
         $.ajax(
         {
             url: 'http://127.0.0.1:5000/Summary',
             type: 'GET',
-            success: function(response) {
+            dataType: "JSON",
+            success: function(response) 
+            {
                 console.log(response);
+                console.log(typeof(response));
+                $(response).each(function(key,val)
+                {
+                  $.each(val,function(k,v)
+                  {
+                    if(k == 'pos')
+                    {
+                      document.getElementById("Positive").innerHTML = v;
+                      window.posVal = v;
+                      document.getElementById("Positive").style.color = "black";
+                    }
+                    else if(k == 'neg')
+                    {
+                      document.getElementById("Negative").innerHTML = v
+                      window.negVal = v;
+                      document.getElementById("Negative").style.color = "black";
+                    }
+                    else if(k == 'neu')
+                    {
+                      document.getElementById("Neutral").innerHTML = v;
+                      window.neuVal = v;
+                    }
+
+
+                  });
+                  ChartIt();
+                });
             },
             error: function(error) {
                 console.log(error);
             }
         }
         );
+
+
+        function ChartIt()
+        {
+          var chart = new CanvasJS.Chart("chartContainer", {
+              animationEnabled: true,
+              title:{
+                text: "Sentiment Analysis",
+                horizontalAlign: "Center"
+              },
+              data: [{
+                type: "doughnut",
+                startAngle: 60,
+                //innerRadius: 60,
+                indexLabelFontSize: 17,
+                indexLabel: "{label} - #percent%",
+                toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+                dataPoints: [
+                  { y: window.posVal, label: "Positive"},
+                  { y: window.neuVal, label: "Neutral"},
+                  { y: window.negVal, label: "Negative"}
+                ]
+              }]
+            });
+            chart.render();
+        }
+
+
+
+
       </script>
+      
 </head>
 
 <body>
@@ -27,8 +92,52 @@
     <label for="tab2-1">Running The Numbers..</label>
     <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
     <div>
-      <h4>Tab One</h4>
-      <p>Generic Bakwas</p>
+      <h4>Insert Dat Visualisation Here Boi</h4>
+      <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <table> 
+        <tr>
+          <th style="text-align: center;">Sentiment</th>
+          <th style="text-align: center;">Percentage</th>
+        </tr>
+        <tr>
+          <td style="color: Black; text-align: center;">Positive</td>
+          <td id="Positive" style="text-align: center;">0 %</td>
+        </tr>
+        <tr>
+          <td  style="text-align: center;">Neutral</td>
+          <td id="Neutral" style="text-align: center;">0 %</td>
+        </tr>
+        <tr>
+          <td style="color: Black; text-align: center;">Negative</td>
+          <td id= "Negative" style="text-align: center;">0 %</td>
+        </tr>
+      </table>
     </div>
   </div>
   <div class="tab-2">
