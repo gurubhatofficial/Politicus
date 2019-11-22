@@ -1,0 +1,12 @@
+.container
+  {
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 100px;
+    text-align:center;
+  }
+#spaceDiv
+{
+	padding-top: 150px;
+}
