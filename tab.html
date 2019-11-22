@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs</title>
+      <link rel="stylesheet" href="style.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript">
+        $.ajax(
+        {
+            url: 'http://127.0.0.1:5000/Summary',
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        }
+        );
+      </script>
+</head>
+
+<body>
+<div class="tabs">
+  <div class="tab-2">
+    <label for="tab2-1">Running The Numbers..</label>
+    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+    <div>
+      <h4>Tab One</h4>
+      <p>Generic Bakwas</p>
+    </div>
+  </div>
+  <div class="tab-2">
+    <label for="tab2-2">In News</label>
+    <input id="tab2-2" name="tabs-two" type="radio">
+    <div>
+      <h4>Tab Two</h4>
+      <p>News Ka Shor</p>
+    </div>
+  </div>
+</div>
+  
+  
+</body>
+</html>

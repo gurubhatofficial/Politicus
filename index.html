@@ -23,6 +23,7 @@
             }
         }
         );
+        open("tab.html")
     });
 });
 
@@ -32,7 +33,7 @@
 <h1 class="container"> Politicus </h1>
 <div id="spaceDiv">
 </div>
-<form style="text-align: center">
+<form style="text-align: center" target="tab.html" method="POST">
   <input type="text" name="Query" class="question" id="nme" required autocomplete="off" />
   <label for="nme"><span style="text-align: center;">What do people think about?</span></label>
   <br>
